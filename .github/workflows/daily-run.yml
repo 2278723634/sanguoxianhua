@@ -22,6 +22,13 @@ jobs:
         run: npm install                     # 如果使用 package-lock.json，推荐 npm ci
 
       - name: Run sanguosha script
-        env:
-          SGS_TOKENS: ${{ secrets.SGS_TOKENS }}
-        run: node sanguosha.js          # 请根据实际脚本文件名调整
+    - name: Run sanguosha script
+      env:
+        SGS_TOKENS: ${{ secrets.SGS_TOKENS }}
+        PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
+        # 如果你用其他渠道，把下面对应的行取消注释（删掉 # 号）：
+        # SCKEY: ${{ secrets.SCKEY }}
+        # BARK: ${{ secrets.BARK }}
+        # TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        # TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+      run: node sanguosha.js
