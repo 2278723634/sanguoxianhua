@@ -1,10 +1,8 @@
 name: Daily Sanguosha Task
-
 on:
   schedule:
-    # 每天 UTC 时间 0 点运行（对应北京时间 8 点，如需北京时间 0 点请改为 '0 16 * * *'）
     - cron: '0 0 * * *'
-  workflow_dispatch:   # 允许手动触发，方便测试
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -12,23 +10,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'          # 或 '16'、'20'
-
+          node-version: '18'
       - name: Install dependencies
-        run: npm install                     # 如果使用 package-lock.json，推荐 npm ci
-
+        run: npm install
       - name: Run sanguosha script
-    - name: Run sanguosha script
-      env:
-        SGS_TOKENS: ${{ secrets.SGS_TOKENS }}
-        PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
-        # 如果你用其他渠道，把下面对应的行取消注释（删掉 # 号）：
-        # SCKEY: ${{ secrets.SCKEY }}
-        # BARK: ${{ secrets.BARK }}
-        # TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-        # TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-      run: node sanguosha.js
+        env:
+          SGS_TOKENS: ${{ secrets.SGS_TOKENS }}
+          PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
+        run: node sanguosha.js
