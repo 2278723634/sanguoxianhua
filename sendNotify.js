@@ -1,3 +1,4 @@
+console.log('✅ 推送模块 sendNotify.js 已成功加载');
 // sendNotify.js - 多合一推送模块
 const axios = require('axios');
 
